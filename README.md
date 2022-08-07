@@ -1,5 +1,5 @@
-### Easy2Hard: Learning to Handle the Intractables from a Synthetic Dataset for Structure-preserving Image Smoothing
-Created by Yidan Feng, from Nanjing University of Aeronautics and Astronautics.
+### Contrastive Semantic-Guided Image Smoothing Network
+Created by Jie Wang, from Nanjing University of Aeronautics and Astronautics.
 
 ### Introduction
 ![](intro.png)
