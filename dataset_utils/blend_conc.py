@@ -19,8 +19,8 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
-    output_dir = '/1T/datasets/VOC_SPS/train'
-    edge_dir = './vocedge'
+    output_dir = ''
+    edge_dir = ''
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(edge_dir, exist_ok=True)
     ind = 0
