@@ -21,8 +21,8 @@ while True:
     else:
         break
 
-output_dir = './VOC_reseg/'
-file_dir = './VOC_seg'
+output_dir = ''
+file_dir = ''
 for file in os.listdir(file_dir):
     key = file.split('.')[0]
     print(key)
