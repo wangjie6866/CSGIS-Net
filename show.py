@@ -11,12 +11,12 @@ from defs import *
 
 def get_args():
     parser = argparse.ArgumentParser()
-    #parser.add_argument("--modelPath", default="/1T/WJ/Easy2Hard-master/outfiles/SPS1/epoch 144_ssim 0.886298_psnr 28.479137 ")
-    parser.add_argument("--modelPath", default="/1T/WJ/Easy2Hard-master/outfiles/SPS_triplet_over/epoch 149_ssim 0.890724_psnr 28.756027 ")
+    #parser.add_argument("--modelPath", default="")
+    parser.add_argument("--modelPath", default="")
     parser.add_argument("--net", default="HDC_edge_refine")
-    parser.add_argument("--sessname", default="SPSsub_cons(over)")
-    parser.add_argument("--test_dir", default="./dataset_utils/test_dataset/NKS/data")
-    parser.add_argument("--output_dir",default="./test_results/NKS")
+    parser.add_argument("--sessname", default="")
+    parser.add_argument("--test_dir", default="")
+    parser.add_argument("--output_dir",default="")
     parser.add_argument("--if_crop",default = False)
     return parser.parse_args()
 
@@ -45,16 +45,8 @@ def run_test(input_dir, outout_dir, args):
     with torch.no_grad():
         ssim = SSIM().cuda()
         mse = MSELoss().cuda()
-        if args.net == "Baseline":
-            net = Baseline(in_c=3, out_c=3, dim=64, num_block=12).cuda()
-        elif args.net == "HDC":
-            net = HDC(in_c=3, out_c=3, dim=64, num_block=20).cuda()
-        elif args.net == "HDC_edge":
-            net = HDC_edge(in_c=3, out_c=3, dim=64, num_block=20).cuda()
-        elif args.net == "HDC_edge_refine":
+        if args.net == "HDC_edge_refine":
             net = HDC_edge_refine(in_c=3, out_c=3, dim=64, num_block=20).cuda()
-        #elif args.net == "HDC_edge_seg" or args.net == "HDC_edge_seg_cons":
-            #net = HDC_edge_seg(in_c=3, out_c=3, dim=64, num_block=20).cuda()
         elif args.net == "PDP_edge_refine":
             net = PDP_edge_refine(in_c=3, out_c=3, dim=64, num_block=12).cuda()
         elif args.net == "Edge_guided":
@@ -82,24 +74,12 @@ def run_test(input_dir, outout_dir, args):
 
             image_o = np.transpose(image_o, (2, 0, 1))
 
-
             image_o = torch.from_numpy(np.expand_dims(image_o, axis=0)).type(torch.FloatTensor).cuda()
-            #image_seg
-            #seg_file = os.path.join(seg_dir, image_name)
-            #image_s = (cv2.imread(str(seg_file))/255.0).astype(np.float32)
-            #image_s = np.transpose(image_s, (2, 0, 1))
-            #image_s = torch.from_numpy(np.expand_dims(image_s, axis=0)).type(torch.FloatTensor).cuda()
 
 
-
-            if args.net == "HDC_edge":
-                edge, result = net(image_o)
-            elif args.net == "HDC_edge_refine" or args.net == "PDP_edge_refine" or args.net =="Edge_guided":
+            if args.net == "HDC_edge_refine" or args.net == "PDP_edge_refine" or args.net =="Edge_guided":
                 edge, result, res = net(image_o)
                 result = result+res
-            #elif args.net == "HDC_edge_seg" or args.net == "HDC_edge_seg_cons":
-                #edge, result, res = net(image_o, image_s)
-                #result = result+res 
 
             else:
                 result = net(image_o)
