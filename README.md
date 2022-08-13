@@ -34,7 +34,7 @@ Download the ground-truth images and textures from the above links.
 Put the texture pattern into 'tx' directory, and put GTs into 'VOC_GT' directory. Both directories should be under the 'dataset utils'.
 ```bash
 cd dataset_utils
-python blend&conc.py
+python blend_conc.py
 ````
 then wait for the dataset generation process to complete.
 Next, randomly select a subset from the generated files in 'train' for cross validation.
