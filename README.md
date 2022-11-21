@@ -18,7 +18,7 @@ Image smoothing is a fundamental low-level vision task that aims to preserve sal
 ### Sources
 
 The following sources can be downloaded from Google drive:
-- dataset : 
+- dataset : https://drive.google.com/drive/folders/19KRy4B8Dw0zNFFem7ptWvuoZRgMRsO0L?usp=sharing
 - trained models for ablation study:
 - trained model of our method : 
 
